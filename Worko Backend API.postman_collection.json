@@ -1,0 +1,190 @@
+{
+	"info": {
+		"_postman_id": "5ff089a3-6854-46b1-9b83-66ceec268a3a",
+		"name": "Worko Backend API",
+		"description": "Collection of APIs for Worko Backend Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32904899",
+		"_collection_link": "https://lunar-resonance-856516.postman.co/workspace/Team-Workspace~4cce7441-3ef1-4922-8b37-b7b9fd72dc66/collection/32904899-5ff089a3-6854-46b1-9b83-66ceec268a3a?action=share&source=collection_link&creator=32904899"
+	},
+	"item": [
+		{
+			"name": "1.Get All Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/worko/user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"worko",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.Get User by ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/worko/user/667c5469d7e18c5e15f365e2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"worko",
+						"user",
+						"667c5469d7e18c5e15f365e2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"johndoe1@example.com\",\n\t\"name\": \"John Doe\",\n\t\"age\": 25,\n\t\"city\": \"New York\",\n\t\"zipCode\": \"10001\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/worko/user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"worko",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.Update User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"johndoe12@example.com\",\n\t\"name\": \"John Doe\",\n\t\"age\": 26,\n\t\"city\": \"New York\",\n\t\"zipCode\": \"10001\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/worko/user/667c5469d7e18c5e15f365e2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"worko",
+						"user",
+						"667c5469d7e18c5e15f365e2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.Update User through Patch",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"johndoe12@example.com\",\n\t\"name\": \"John Doe Hey\",\n\t\"age\": 26,\n\t\"city\": \"New York\",\n\t\"zipCode\": \"10001\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/worko/user/667c5469d7e18c5e15f365e2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"worko",
+						"user",
+						"667c5469d7e18c5e15f365e2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.Soft Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/worko/user/{{userId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"worko",
+						"user",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:5000"
+		}
+	]
+}
