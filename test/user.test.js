@@ -2,16 +2,36 @@ const ConnectionDB=require('../config/db');
 const User=require('../models/UserModel');
 const server  = require('../server');
 require('dotenv').config();
-
 let token="";
+
 describe('User API', () => {
+  beforeAll(async () => {
+    await ConnectionDB();
+    const response = await fetch(`http://localhost:5000/api/auth/worko/login`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "email": process.env.ADMIN_EMAIL,
+        "password": process.env.ADMIN_PASSWORD
+      })
+  });
+  const data = await response.json();
+  console.log("Login Processing----",data)
+  token = data.token;
+  expect(data.code).toBe(200);
+  expect(data.message).toBe('User logged in successfully');
+}, 10000);
+
 
   // 1. Get All the Users
   test('Fetch All Users', async () => {
     const response = await fetch(`http://localhost:5000/api/worko/user`, {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'authorization':token
         },
     });
 
@@ -26,7 +46,8 @@ test('Fetch User By Id', async () => {
   const response = await fetch(`http://localhost:5000/api/worko/user/667c5469d7e18c5e15f365e2`, {
       method: 'GET',
       headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'authorization':token
       },
   });
 
@@ -44,7 +65,8 @@ test('Fetch User By Id', async () => {
       const response = await fetch(`http://localhost:5000/api/worko/user`, {
           method: 'POST',
           headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'authorization':token
           },
           body: JSON.stringify({
             "email": ramdomEmail,
@@ -66,7 +88,8 @@ test('Fetch User By Id', async () => {
     const response = await fetch(`http://localhost:5000/api/worko/user/667c5469d7e18c5e15f365e2`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'authorization':token
         },
         body: JSON.stringify({
           "name": "John Doe"
@@ -85,7 +108,8 @@ test('User Updation By Patch Method', async () => {
   const response = await fetch(`http://localhost:5000/api/worko/user/667c5469d7e18c5e15f365e2`, {
       method: 'PATCH',
       headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'authorization':token
       },
       body: JSON.stringify({
         name: "John Doe",
@@ -105,7 +129,8 @@ test('Soft Delete By User Id', async () => {
   const response = await fetch(`http://localhost:5000/api/worko/user/667c5469d7e18c5e15f365e2`, {
       method: 'DELETE',
       headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'authorization':token
       }
   });
   
